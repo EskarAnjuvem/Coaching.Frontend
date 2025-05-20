@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12 text-center">
+      <h5>Fill the following details and submit</h5>
+    </div>
+  </div>
+  <div class="row md-2">
+    <form action="" class="row g-3" id="studentForm" [formGroup]="studentForm">
+      <div class="col-md-5">
+        <label for="firstName" class="form-label ">First and Middle Name</label>
+        <input id="firstName" formControlName="firstName" type="text" class="form-control" placeholder="" />
+        @if (studentForm.controls['firstName'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['firstName'].errors?.['required']){
+          <span>This is Required</span>
+          }
+          @if (studentForm.controls['firstName'].errors?.['minlength']){
+          <span>Minimum 3 characters needed</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-md-5">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input id="lastName" formControlName="lastName" type="text" class="form-control" />
+        @if (studentForm.controls['lastName'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['lastName'].errors?.['required']){
+          <span>This is Required</span>
+          }
+          @if (studentForm.controls['lastName'].errors?.['minlength']){
+          <span>Minimum 2 characters needed</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-md-2">
+        <label for="gender" class="form-label">Gender</label>
+        <select name="" id="gender" formControlName="gender" class="form-select">
+          <option value="" disabled> --Select Gender-- </option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+        @if (studentForm.controls['gender'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['gender'].errors?.['required']){
+          <span>This is Required</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-md-2">
+        <label for="dateOfBirth" class="form-label">Date of Birth</label>
+        <input id="dateOfBirth" formControlName="dateOfBirth" type="date" class="form-control"
+          (change)="onDateChange($event)" />
+        @if (studentForm.controls['dateOfBirth'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['dateOfBirth'].errors?.['required']){
+          <span>This is Required</span>
+          }
+          <span class="text-danger" *ngIf="!withinYearRange">
+            Eligible only if between 13 and 18 years old.
+          </span>
+        </div>
+        }
+      </div>
+      <div class="col-md-2">
+        <label for="batchStartYear" class="form-label">High School Start Year</label>
+        <select class="form-select" id="batchStartYear" formControlName="batchStartYear">
+          <option value="" selected> -- Select a Year -- </option>
+          <option *ngFor="let year of startYears" [value]="year">{{year}}</option>
+        </select>
+        @if (studentForm.controls['batchStartYear'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['batchStartYear'].errors?.['required']){
+          <span>This is Required</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-md-8">
+        <label for="schoolId" class="form-label">Enrolled School</label>
+        <select class="form-select" formControlName="schoolId" id="schoolId">
+          <option value="" selected> --Select a School-- </option>
+          <option *ngFor="let school of schools" [value]="school.id">{{school.schoolName}}</option>
+        </select>
+        @if (!isSchoolLoaded){
+        <span class="text-danger">Error Loading Schools List. Try Later.</span>
+        }
+        @if (isSchoolLoaded && studentForm.controls['schoolId'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['schoolId'].errors?.['required']){
+          <span>This is Required</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-md-6">
+        <label for="emailId" class="form-label">Email Id</label>
+        <input id="emailId" formControlName="email" type="email" class="form-control" />
+        @if (studentForm.controls['email'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['email'].errors?.['required']){
+          <span>This is Required</span>
+          }
+          @if (studentForm.controls['email'].errors?.['email']){
+          <span>Must have an email provider</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-md-3">
+        <label for="contactNumber" class="form-label">Contact Number</label>
+        <input id="contactNumber" formControlName="contactNumber" type="text" class="form-control" pattern="[0-9]{10}"
+          placeholder="0123456789">
+        @if (studentForm.controls['contactNumber'].touched){
+        <div class="text-danger">
+          @if (studentForm.controls['contactNumber'].errors?.['required']){
+          <span>This is Required</span>
+          }
+          @if (studentForm.controls['contactNumber'].errors?.['pattern']){
+          <span>10 digits for phone Number</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary my-2" type="button" (click)="onSaveUser()"
+          [disabled]="isSubmitting || studentForm.invalid || errorMessage || !withinYearRange">
+          <span *ngIf="!isSubmitting">Submit Form</span>
+          <span *ngIf="isSubmitting">Submitting....</span>
+        </button>
+      </div>
+    </form>
+    <div *ngIf="sucessMessage" class="alert alert-success">
+      {{sucessMessage}}
+      <button class="btn btn-warning" (click)="onAddAnother()">Add Another Record</button>
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{errorMessage}}
+      <button class="btn btn-danger" (click)="retryOnError()" class="btn btn-danger">Retry</button>
+    </div>
+  </div>
+</div>
