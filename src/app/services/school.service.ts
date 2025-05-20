@@ -8,7 +8,7 @@ import { School } from '../models/school.model';
 })
 export class SchoolService {
   
-  private apiUrl = "academyofphysics-production.up.railway.app/api";
+  private apiUrl = "https://academyofphysics-production.up.railway.app/api";
 
 
   constructor(private http: HttpClient) { }

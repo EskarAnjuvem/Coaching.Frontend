@@ -14,7 +14,7 @@ import { SchoolService } from '../../services/school.service';
 export class AdmissionComponent implements OnInit {
 
   http = inject(HttpClient);
-  apiUrl = "academyofphysics-production.up.railway.app/api";
+  apiUrl = "https://academyofphysics-production.up.railway.app/api";
   currentYear : number = new Date().getFullYear();
   withinYearRange: boolean = true;
   startYears: number[] = [];
