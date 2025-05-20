@@ -20,9 +20,9 @@ export class SchoolListComponent implements OnInit {
   ngOnInit(): void {
     this.schoolService.getSchools().subscribe({
       next: (data) => {
-        console.log("Data Received", data),
-          this.schools = data,
-          this.loading = false
+        data.sort((a: School, b: School) => a.schoolName.toLowerCase().localeCompare(b.schoolName.toLowerCase())),
+        this.schools = data,
+        this.loading = false
       },
       error: (err) => {
         this.loading = false

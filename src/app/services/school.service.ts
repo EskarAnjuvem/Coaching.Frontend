@@ -7,15 +7,10 @@ import { School } from '../models/school.model';
   providedIn: 'root'
 })
 export class SchoolService {
-  
+
   private apiUrl = "https://academyofphysics-production.up.railway.app/api";
-
-
   constructor(private http: HttpClient) { }
-
   getSchools(): Observable<School[]> {
     return this.http.get<School[]>(`${this.apiUrl}/SchoolList`);
   }
-
-
 }
