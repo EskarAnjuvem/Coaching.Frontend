@@ -23,18 +23,7 @@ export class AdmissionComponent implements OnInit {
   isSubmitting: boolean = false;
   sucessMessage: string | null = null;
   errorMessage: string | null = null;
-
-  studentDetails: any = {
-    "id": 0,
-    "firstName": "",
-    "lastName": "",
-    "gender": "",
-    "email": "",
-    "dateOfBirth": "",
-    "contactNumber": "",
-    "enrolledBatch": "",
-    "schoolId": ""
-  }
+  
   constructor(private schoolService: SchoolService) { }
 
   ngOnInit(): void {    
@@ -48,21 +37,20 @@ export class AdmissionComponent implements OnInit {
         this.schools = data;        
       },
       error: (err) => {
-        this.isSchoolLoaded = false;
-        console.error('Error Fetching schools', err);
+        this.isSchoolLoaded = false;        
       } 
     });
   }
 
-  studentForm: FormGroup = new FormGroup({
-    id: new FormControl(0),
+  studentForm: FormGroup = new FormGroup({    
     firstName: new FormControl("", [Validators.required, Validators.minLength(3)]),
     lastName: new FormControl("", [Validators.required, Validators.minLength(2)]),
     gender: new FormControl("", [Validators.required]),
-    email: new FormControl("", [Validators.required, Validators.email]),
+    emailAddress: new FormControl("", [Validators.required, Validators.email]),
     dateOfBirth: new FormControl("", [Validators.required]),
     contactNumber: new FormControl("", [Validators.required, Validators.pattern('[0-9]{10}')]),
-    batchStartYear: new FormControl(null, [Validators.required]),
+    startYear: new FormControl(null, [Validators.required]),
+    endYear : new FormControl(""),
     schoolId: new FormControl("", [Validators.required]),
   });
   
@@ -76,23 +64,25 @@ export class AdmissionComponent implements OnInit {
 
   onSaveUser() {
     if (this.studentForm.invalid || !this.withinYearRange) return;
+
+    const endYear = parseInt(this.studentForm.get('startYear')?.value) + 2;
+    this.studentForm.get('endYear')?.setValue(endYear, {emitEvent:false});
+
     const formValue = this.studentForm.value;
     this.isSubmitting = true;
     this.studentForm.disable();
-    this.http.post("${apiUrl}/StudentList", formValue)
+    this.http.post("${apiUrl}/Student", formValue)
       .subscribe({
         next: (res) => {
           this.isSubmitting = false;
           this.sucessMessage = "Student Record entered successfully!";
           this.errorMessage = null;
           this.studentForm.reset();
-
         },
         error: (err) => {
           this.isSubmitting = false;
-          this.errorMessage = "An error occurred while submitting the form.";
+          this.errorMessage = err.error?.error;
           this.sucessMessage = null;
-
         }
       });
   }
@@ -101,6 +91,7 @@ export class AdmissionComponent implements OnInit {
     this.sucessMessage = null;
     this.errorMessage = null;
     this.studentForm.reset();
+    this.studentForm.enable();
   }
 
   retryOnError() {

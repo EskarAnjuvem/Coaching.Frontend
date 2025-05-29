@@ -65,14 +65,14 @@
         }
       </div>
       <div class="col-md-2">
-        <label for="batchStartYear" class="form-label">High School Start Year</label>
-        <select class="form-select" id="batchStartYear" formControlName="batchStartYear">
+        <label for="startYear" class="form-label">High School Start Year</label>
+        <select class="form-select" id="startYear" formControlName="startYear">
           <option value="" selected> -- Select a Year -- </option>
           <option *ngFor="let year of startYears" [value]="year">{{year}}</option>
         </select>
-        @if (studentForm.controls['batchStartYear'].touched){
+        @if (studentForm.controls['startYear'].touched){
         <div class="text-danger">
-          @if (studentForm.controls['batchStartYear'].errors?.['required']){
+          @if (studentForm.controls['startYear'].errors?.['required']){
           <span>This is Required</span>
           }
         </div>
@@ -126,7 +126,7 @@
       </div>
       <div class="col-12">
         <button class="btn btn-primary my-2" type="button" (click)="onSaveUser()"
-          [disabled]="isSubmitting || studentForm.invalid || errorMessage || !withinYearRange">
+          [disabled]="isSubmitting || studentForm.invalid || errorMessage || !withinYearRange || studentForm.disabled">
           <span *ngIf="!isSubmitting">Submit Form</span>
           <span *ngIf="isSubmitting">Submitting....</span>
         </button>
