@@ -97,13 +97,13 @@
       </div>
       <div class="col-md-6">
         <label for="emailId" class="form-label">Email Id</label>
-        <input id="emailId" formControlName="email" type="email" class="form-control" />
-        @if (studentForm.controls['email'].touched){
+        <input id="emailId" formControlName="emailAddress" type="email" class="form-control" />
+        @if (studentForm.controls['emailAddress'].touched){
         <div class="text-danger">
-          @if (studentForm.controls['email'].errors?.['required']){
+          @if (studentForm.controls['emailAddress'].errors?.['required']){
           <span>This is Required</span>
           }
-          @if (studentForm.controls['email'].errors?.['email']){
+          @if (studentForm.controls['emailAddress'].errors?.['emailAddress']){
           <span>Must have an email provider</span>
           }
         </div>
