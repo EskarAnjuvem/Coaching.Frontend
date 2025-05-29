@@ -15,34 +15,34 @@ export class AdmissionComponent implements OnInit {
 
   http = inject(HttpClient);
   apiUrl = "https://academyofphysics-production.up.railway.app/api";
-  currentYear : number = new Date().getFullYear();
+  currentYear: number = new Date().getFullYear();
   withinYearRange: boolean = true;
   startYears: number[] = [];
   schools: School[] = [];
-  isSchoolLoaded : boolean = false;
+  isSchoolLoaded: boolean = false;
   isSubmitting: boolean = false;
   sucessMessage: string | null = null;
   errorMessage: string | null = null;
-  
+
   constructor(private schoolService: SchoolService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     for (let year = this.currentYear - 3; year <= this.currentYear + 2; year++) {
       this.startYears.push(year);
     }
     this.schoolService.getSchools().subscribe({
       next: (data) => {
         this.isSchoolLoaded = true;
-        data.sort((a: School, b: School) => a.schoolName.toLowerCase().localeCompare(b.schoolName.toLowerCase()));        
-        this.schools = data;        
+        data.sort((a: School, b: School) => a.schoolName.toLowerCase().localeCompare(b.schoolName.toLowerCase()));
+        this.schools = data;
       },
       error: (err) => {
-        this.isSchoolLoaded = false;        
-      } 
+        this.isSchoolLoaded = false;
+      }
     });
   }
 
-  studentForm: FormGroup = new FormGroup({    
+  studentForm: FormGroup = new FormGroup({
     firstName: new FormControl("", [Validators.required, Validators.minLength(3)]),
     lastName: new FormControl("", [Validators.required, Validators.minLength(2)]),
     gender: new FormControl("", [Validators.required]),
@@ -50,10 +50,10 @@ export class AdmissionComponent implements OnInit {
     dateOfBirth: new FormControl("", [Validators.required]),
     contactNumber: new FormControl("", [Validators.required, Validators.pattern('[0-9]{10}')]),
     startYear: new FormControl(null, [Validators.required]),
-    endYear : new FormControl(""),
+    endYear: new FormControl(""),
     schoolId: new FormControl("", [Validators.required]),
   });
-  
+
   onDateChange(event: any) {
     const selectedDate = new Date(event.target.value);
     const year = selectedDate.getFullYear();
@@ -66,12 +66,12 @@ export class AdmissionComponent implements OnInit {
     if (this.studentForm.invalid || !this.withinYearRange) return;
 
     const endYear = parseInt(this.studentForm.get('startYear')?.value) + 2;
-    this.studentForm.get('endYear')?.setValue(endYear, {emitEvent:false});
+    this.studentForm.get('endYear')?.setValue(endYear, { emitEvent: false });
 
     const formValue = this.studentForm.value;
     this.isSubmitting = true;
     this.studentForm.disable();
-    this.http.post("${apiUrl}/Student", formValue)
+    this.http.post("https://academyofphysics-production.up.railway.app/api/Student", formValue)
       .subscribe({
         next: (res) => {
           this.isSubmitting = false;
