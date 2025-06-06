@@ -5,11 +5,11 @@
 </div>
 
 <form (ngSubmit)="submitMarks()">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped w-100">
       <thead>
         <tr>
-          <th>Student Name</th>
-          <th>Marks Obtained</th>
+          <th style="width: 70%;">Student Name</th>
+          <th style="width: 30%;">Marks Obtained</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
               type="number"
               [(ngModel)]="entry.marksObtained"
               name="marks-{{entry.studentId}}"
-              
+              class="form-control"
               required
             />
           </td>
