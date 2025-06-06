@@ -4,7 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
-  imports: [RouterOutlet, RouterLink, HttpClient],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css'
 })
