@@ -1,13 +1,37 @@
 <div class="container">
     <div class="row">
-        <div class="col-3 rounded m-3 bg-warning p-3 text-center">
-            <a class="nav-link" routerLink="student-list" routerLinkActive="active">
-                <h4>Student List</h4>
-            </a>
+        <div class="dropdown mt-2 text-center">
+            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">Choose Operation
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item mb-1" routerLink="student-list">Fetch Student List</a></li>
+              <li><a class="dropdown-item mb-1" routerLink="create-exam">Create Exam</a></li>
+              <li><a class="dropdown-item mb-1" routerLink="edit-student-record">Edit Student Record</a></li>
+            </ul>
+        </div> 
+        <!-- <div class="col-6">
+            <button type="button" class="btn btn-success">Success</button>
         </div>
-    </div>
+        <div class="col-3 rounded m-3 bg-warning p-3 text-center" >
+            <a class="nav-link" routerLink="student-list" routerLinkActive="active">
+                <h4>Student List</h4></a>
+        </div>
+        <div class="col-3 rounded m-3 bg-warning p-3 text-center" >
+            <a class="nav-link" routerLink="student-list" routerLinkActive="active">
+                <h4>Create Exam</h4></a>
+        </div>
+        <div class="col-3 rounded m-3 bg-warning p-3 text-center" >
+            <a class="nav-link" routerLink="student-list" routerLinkActive="active">
+                <h4>Edit Student Record</h4></a>
+        </div> -->
 
-    <div class="rounded px-4">
-        <router-outlet></router-outlet>
+    </div>
+    
+    <div class="row rounded">
+        <div class="col col-md-12">
+            <router-outlet></router-outlet>
+        </div>
+        
+    </div>
     </div>
 </div>

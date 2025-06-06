@@ -22,7 +22,7 @@ export class LoginComponent {
     this.http.post("https://academyofphysics-production.up.railway.app/api/AdminLogin",this.adminObject).subscribe({
       next:(data : any) => {
         this.loginSuccess = true;
-        this.router.navigateByUrl("student-list");
+        this.router.navigateByUrl("admin-home");
       },
       error: (err) => {
         this.loginSuccess = false;

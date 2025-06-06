@@ -1,9 +1,10 @@
+import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-student-list',
-  imports: [],
+  imports: [NgFor],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })

@@ -1,0 +1,77 @@
+<div class="container">
+    <!-- <div class="row mt-5">
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-primary">Edit by Batch Year</button>
+        </div>
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-primary">Edit by Id</button>
+        </div>        
+    </div> -->
+    <div class="row mt-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-check">
+                <input type="radio" class="form-check-input custom-radio" [(ngModel)]="editMode" name="editByChoices" id="editByBatchYear" value="batchYear">
+                <label for="editByBatchYear" class="form-check-label">Edit By High School Start Year</label>            
+            </div>
+            <div class="my-3" *ngIf="editMode === 'batchYear'">
+                <label for="selectedYear" class="form-label">Select Year : </label>
+                <select
+                class="form-select"
+                id="selectedYear"
+                name="selectedYear"
+                [(ngModel)]="selectedYear"
+                required
+                #yearControl="ngModel">
+                    <option value="" selected disabled> --Year-- </option>
+                    <option *ngFor="let year of startYears" [value]="year">{{year}}</option>                    
+                </select>
+                <span class="text-danger" *ngIf="yearControl.touched && yearControl.invalid">
+                    Please select a year
+                </span>
+                <div *ngIf="!yearControl.invalid" class="my-3">
+                    <label for="selectedProperty" class="form-label">Select Property to Edit : </label>
+                    <select
+                    class="form-select"
+                    id="selectedProperty"
+                    name="selectedProperty"
+                    [(ngModel)]="selectedProperty"
+                    #propertyControl="ngModel">
+                        <option value="" selected disabled> --Property-- </option>
+                        <option value="Name"> Name </option>
+                        <option value="Marks">Exam Record</option>
+                        <option value="BatchStartYear">Start Year</option>
+                        <option value="School">School</option>
+                    </select>
+                    <div *ngIf="propertyControl.value === 'Marks'" class="my-3">
+                        <label for="selectedExam" class="form-label">Select Exam : </label>
+                        <select
+                        class="form-select"
+                        id="selectedExam"
+                        name="selectedExam" [(ngModel)]="selectedExamId">
+                            <!-- <option value="" [ngValue]="null" selected disabled> --Exams-- </option>
+                            <option *ngFor="let record of examRecords" [ngValue]="record">{{record.examName}}</option>  -->
+                            <option value="" selected disabled> --Exams-- </option>
+                            <option *ngFor="let record of examRecords" [value]="record.id">{{record.examName}}</option>                                                
+                        </select>
+                    </div>   
+                </div>
+                
+            </div>
+                    
+            <div class="form-check my-3">
+                <input type="radio" class="form-check-input custom-radio" name="editByChoices" [(ngModel)]="editMode" id="editById" value="studentId">
+                <label for="editById" class="form-check-label">Edit By Id</label>
+            </div>
+            <div class="my-3" *ngIf="editMode === 'studentId'">
+                <label for="studentId" class="form-label">Enter ID :</label>
+                <input type="number" name="" id="studentId" class="form-control">
+            </div>  
+            <button class="btn btn-warning" (click)="OnEditChoice()"> Submit </button>          
+        </div>   
+        <div class="col-md-3"></div>
+    </div>
+    <!-- <div class="row">
+        <button>Go</button>
+    </div> -->
+</div>

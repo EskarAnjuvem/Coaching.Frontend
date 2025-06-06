@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <h5>Enter the details of the exam</h5>
+        </div>
+    </div>
+    <div class="row md-2">
+        <form action="" class="row g-3" id="examDetailsForm" [formGroup]="examDetailsForm">
+            <div class="col-md-5">
+                <label for="examName" class="form-label">Exam Name</label>
+                <input id="examName" formControlName="examName" type="text" class="form-control">
+            </div>
+            <div class="col-md-5">
+                <label for="examMarks" class="form-label">Total Marks</label>
+                <input id="examMarks" formControlName="examMarks" type="number" class="form-control">
+            </div>
+            <div class="col-md-5">
+                <label for="examLevel" class="form-label">Overall Difficulty Level</label>
+                <select class="form-select" id="examLevel" formControlName="examLevel">
+                    <option value="" selected> -- Level -- </option>
+                    <option value="Easy">Easy</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Difficult">Hard</option>
+                    <option value="Olympiad">Olympiad</option>
+                </select>                
+            </div>
+            <div class="col-md-5">
+                <label for="examDate" class="form-label">Exam Date</label>
+                <input id="examDate" formControlName="examDate" type="date" class="form-control">
+            </div>
+            <div class="col-md-5">
+                <label for="examDescription" class="form-label">Description</label>
+                <textarea id="examDescription" class="form-control" name="review" rows="5" cols="40" placeholder="Provide some description of exam paper..."></textarea>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary my-2" type="button" (click)="onSaveExam()"
+                  [disabled]="isSubmitting || examDetailsForm.invalid || errorMessage || examDetailsForm.disabled">
+                  <span *ngIf="!isSubmitting">Submit Form</span>
+                  <span *ngIf="isSubmitting">Submitting....</span>
+                </button>
+              </div>            
+        </form>
+    </div>
+</div>
