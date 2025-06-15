@@ -32,6 +32,7 @@ export class StudentMarksEntryComponent implements OnInit {
       `https://academyofphysics-production.up.railway.app/api/studentmark/byExamAndBatch`,
       { params: { examId: this.examId, batchStartYear: this.batchStartYear } }
     ).subscribe(data => {
+      data.sort((a:StudentMarkDTO,b:StudentMarkDTO)=> a.studentName.toLowerCase().localeCompare(b.studentName.toLowerCase()));
       this.markList = data;
     });
   }
