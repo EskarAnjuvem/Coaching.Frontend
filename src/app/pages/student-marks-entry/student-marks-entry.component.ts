@@ -49,7 +49,7 @@ export class StudentMarksEntryComponent implements OnInit {
       this.markList = data;
     });
 
-    this.http.get<ExamRecordDTO>("http://localhost:7270/api/ExamRecord/examDetails", { params: { id: this.examId } }).subscribe({
+    this.http.get<ExamRecordDTO>("https://academyofphysics-production.up.railway.app/api/ExamRecord/examDetails", { params: { id: this.examId } }).subscribe({
       next: (data) => { this.examDetails = data },
       error: (err) => { }
     });
