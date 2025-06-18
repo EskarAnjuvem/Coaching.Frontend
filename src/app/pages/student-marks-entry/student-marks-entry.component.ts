@@ -78,7 +78,9 @@ export class StudentMarksEntryComponent implements OnInit {
     // Second row: Description (spanning full width)
     doc.text(`Description: ${exam.examDescription}`, 14, 50);
 
-    const sortedList = [...this.markList].sort((a, b) => b.marksObtained - a.marksObtained);
+    const sortedList = [...this.markList]
+      .filter( item => item.marksObtained != 0)
+      .sort((a, b) => b.marksObtained - a.marksObtained);
     
     const headers = [['Sl.No.', 'Name', 'Marks']];
     const rows = sortedList.map((s,index) => [index+1, s.studentName, s.marksObtained]);
