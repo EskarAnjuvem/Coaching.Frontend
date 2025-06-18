@@ -77,9 +77,11 @@ export class StudentMarksEntryComponent implements OnInit {
 
     // Second row: Description (spanning full width)
     doc.text(`Description: ${exam.examDescription}`, 14, 50);
+
+    const sortedList = [...this.markList].sort((a, b) => b.marksObtained - a.marksObtained);
     
     const headers = [['Sl.No.', 'Name', 'Marks']];
-    const rows = this.markList.map((s,index) => [index+1, s.studentName, s.marksObtained]);
+    const rows = sortedList.map((s,index) => [index+1, s.studentName, s.marksObtained]);
 
     autoTable(doc, {
       startY: 60,

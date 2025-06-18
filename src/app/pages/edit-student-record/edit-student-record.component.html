@@ -65,13 +65,10 @@
             </div>
             <div class="my-3" *ngIf="editMode === 'studentId'">
                 <label for="studentId" class="form-label">Enter ID :</label>
-                <input type="number" name="" id="studentId" class="form-control">
+                <input type="number" name="" id="studentId" class="form-control" [(ngModel)]="enteredId">
             </div>  
             <button class="btn btn-warning" (click)="OnEditChoice()"> Submit </button>          
         </div>   
         <div class="col-md-3"></div>
-    </div>
-    <!-- <div class="row">
-        <button>Go</button>
-    </div> -->
+    </div>    
 </div>

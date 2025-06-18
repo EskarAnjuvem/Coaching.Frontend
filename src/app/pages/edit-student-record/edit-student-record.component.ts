@@ -21,6 +21,7 @@ export class EditStudentRecordComponent {
   examRecords: any[] = [];
   router = inject(Router);
   selectedExam: any = null;
+  enteredId : number | string = '';
 
   http = inject(HttpClient);
 
@@ -36,19 +37,18 @@ export class EditStudentRecordComponent {
 
       },
       error: (err) => {
-        console.error('Error fetching records');
-        //this.isSchoolLoaded = false;        
+        console.error('Error fetching records'); 
       }
     });
   }
 
   OnEditChoice() {
-    if (this.editMode === "batchYear") {
-      // console.log(this.selectedYear);
-      //console.log(this.selectedExamId);
-      // console.log('Selected Exam ID:', this.selectedExam?.Id);
-      //this.router.navigate(['/student-marks-entry', this.selectedExamId, this.selectedYear]);
+    if (this.editMode === "batchYear") {      
       this.router.navigate(['/admin-home/student-marks-entry', this.selectedExamId, this.selectedYear]);
+    }
+    else if (this.editMode === "studentId"){
+      
+      this.router.navigate(['admin-home/edit-individual',this.enteredId]);
     }
 
 

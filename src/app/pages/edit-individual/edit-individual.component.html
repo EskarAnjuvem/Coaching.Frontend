@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">First Name</label>
+                    <input class="form-control" formControlName="firstName" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Last Name</label>
+                    <input class="form-control" formControlName="lastName" />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Gender</label>
+                    <select class="form-select" formControlName="gender">                
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>                
+                    </select>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label" >Email</label>
+                    <input class="form-control" formControlName="emailAddress" type="email" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Date of Birth</label>
+                    <input class="form-control" formControlName="dateOfBirth" type="date" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Contact</label>
+                    <input class="form-control" formControlName="contactNumber" />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Start Year</label>
+                    <input class="form-control" formControlName="startYear" type="number" />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">End Year</label>
+                    <input class="form-control" formControlName="endYear" type="number" />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">School Id (optional)</label>
+                    <input class="form-control" formControlName="schoolId" type="number" />
+                  </div>
+            </div>   
+            <button type="submit" class="btn btn-primary my-3" [disabled]="studentForm.invalid">Update Student</button>
+          </form>
+    </div>
+</div>
