@@ -71,9 +71,9 @@ export class StudentMarksEntryComponent implements OnInit {
 
     doc.text(`${exam.examSubject}`, 14, 30);
     doc.text(`Exam Name: ${exam.examName}`, 70, 30);       // X shifted to the right
-    doc.text(`Exam Date: ${exam.examDate}`, 140, 30);
-    doc.text(`Total Marks: ${exam.examMarks}`, 14, 40); // Adjust spacing as needed
-    doc.text(`Level : ${exam.examLevel}`,70,40);
+    doc.text(`Exam Date: ${exam.examDate}`, 14, 40);
+    doc.text(`Total Marks: ${exam.examMarks}`, 70, 40); // Adjust spacing as needed
+    doc.text(`Level : ${exam.examLevel}`,130,40);
 
     // Second row: Description (spanning full width)
     doc.text(`Description: ${exam.examDescription}`, 14, 50);

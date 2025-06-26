@@ -1,1 +1,42 @@
-<p>paper-generate works!</p>
+<div class="container-fluid">
+    <div class="row md-5">
+        <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-md-3">
+                <label for="questionSubject" class="form-label">Subject :</label>
+                <ng-select id="questionSubject" [items]="subjects" class="form-control" bindLabel="subjectName"
+                    bindValue="id" [multiple]="false" formControlName="subjectId" [searchable]="true"
+                    [loading]="subjects.length === 0">
+                </ng-select>
+            </div>
+            <div class="col-md-3">
+                <label for="questionDifficultyLevel" class="form-label">Difficulty Level :</label>
+                <ng-select id="questionDifficultyLevel" [items]="difficulties" class="form-control"
+                    bindLabel="levelName" bindValue="id" [multiple]="false" formControlName="difficultyLevelId"
+                    [searchable]="true" [loading]="difficulties.length === 0">
+                </ng-select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Number of Questions</label>
+                <input type="number" formControlName="questionCount" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                <label for="ngSelectTags" class="form-label">Tags : </label>
+                <ng-select id="ngSelectTags" [items]="availableTags" class="form-control" bindLabel="tagName"
+                    bindValue="id" [multiple]="true" formControlName="tagIds" [searchable]="true"
+                    [loading]="availableTags.length === 0">
+                </ng-select>
+            </div>
+
+            <div class="form-check col-12">
+                <input type="radio" class="form-check-input custom-radio" name="includeAnswers" id="includeAnswers"
+                    value="true" formControlName="includeAnswers">
+                <label for="includeAnswers" class="form-check-label">Include Answer Key</label>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Generate Questions PDF</button>
+            </div>
+        </form>
+    </div>
+</div>
