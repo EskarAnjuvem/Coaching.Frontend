@@ -22,7 +22,7 @@
                     <option value="Moderate">Moderate</option>
                     <option value="Difficult">Hard</option>
                     <option value="Olympiad">Olympiad</option>
-                </select>                
+                </select>
             </div>
             <div class="col-md-5">
                 <label for="examDate" class="form-label">Exam Date</label>
@@ -30,15 +30,16 @@
             </div>
             <div class="col-md-5">
                 <label for="examDescription" class="form-label">Description</label>
-                <textarea id="examDescription" class="form-control" name="review" rows="5" cols="40" placeholder="Provide some description of exam paper..."></textarea>
+                <textarea id="examDescription" formControlName="examDescription" class="form-control" name="review"
+                    rows="5" cols="40" placeholder="Provide some description of exam paper..."></textarea>
             </div>
             <div class="col-12">
                 <button class="btn btn-primary my-2" type="button" (click)="onSaveExam()"
-                  [disabled]="isSubmitting || examDetailsForm.invalid || errorMessage || examDetailsForm.disabled">
-                  <span *ngIf="!isSubmitting">Submit Form</span>
-                  <span *ngIf="isSubmitting">Submitting....</span>
+                    [disabled]="isSubmitting || examDetailsForm.invalid || errorMessage || examDetailsForm.disabled">
+                    <span *ngIf="!isSubmitting">Submit Form</span>
+                    <span *ngIf="isSubmitting">Submitting....</span>
                 </button>
-              </div>            
+            </div>
         </form>
     </div>
 </div>
