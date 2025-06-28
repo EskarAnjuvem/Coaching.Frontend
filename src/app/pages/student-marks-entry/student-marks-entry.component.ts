@@ -63,11 +63,19 @@ export class StudentMarksEntryComponent implements OnInit {
 
   downloadPDF() {
     const doc = new jsPDF();
+    const title = 'Exam Report';
     doc.setFontSize(16);
-    doc.text("Exam Report",14,15);
+    doc.setFont('helvetica','bold');
+
+    const pageWidth = doc.internal.pageSize.getWidth();     // Total page width
+    const textWidth = doc.getTextWidth(title);              // Width of the title text
+    const x = (pageWidth - textWidth) / 2;                  // Center position
+
+    doc.text(title, x, 15);
 
     doc.setFontSize(12);
     const exam = this.examDetails;
+    doc.setFont('times', 'italic');
 
     doc.text(`${exam.examSubject}`, 14, 30);
     doc.text(`Exam Name: ${exam.examName}`, 70, 30);       // X shifted to the right
@@ -76,7 +84,9 @@ export class StudentMarksEntryComponent implements OnInit {
     doc.text(`Level : ${exam.examLevel}`,130,40);
 
     // Second row: Description (spanning full width)
-    doc.text(`Description: ${exam.examDescription}`, 14, 50);
+    const descriptionLines = doc.splitTextToSize(`Description: ${exam.examDescription}`, 180);
+    doc.text(descriptionLines, 14, 50);
+    const tableStartY = 50 + descriptionLines.length * 6;
 
     const sortedList = [...this.markList]
       .filter( item => item.marksObtained != 0)
@@ -86,7 +96,7 @@ export class StudentMarksEntryComponent implements OnInit {
     const rows = sortedList.map((s,index) => [index+1, s.studentName, s.marksObtained]);
 
     autoTable(doc, {
-      startY: 60,
+      startY: tableStartY,
       head: headers,
       body: rows,
       theme: 'grid'
