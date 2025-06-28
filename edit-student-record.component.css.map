@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/pages/edit-student-record/edit-student-record.component.css"],
-  "sourcesContent": [".custom-radio {\r\n    border: 2px solid black;\r\n    width: 1.1em;\r\n    height: 1.1em;\r\n  }"],
-  "mappings": ";AAAA,CAAC;AACG,UAAQ,IAAI,MAAM;AAClB,SAAO;AACP,UAAQ;AACV;",
-  "names": []
-}
