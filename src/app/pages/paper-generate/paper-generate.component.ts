@@ -22,7 +22,7 @@ export class PaperGenerateComponent {
   ngOnInit() {
     this.quizForm = this.fb.group({
       subjectId: ['', Validators.required],
-      difficultyLevelId: ['', Validators.required],
+      difficultyLevelId: [0, Validators.required],
       questionCount: [5, [Validators.required, Validators.min(1)]],
       tagIds: [[], this.atLeastOneTag],
       includeAnswers: [false]
@@ -41,6 +41,9 @@ export class PaperGenerateComponent {
       .subscribe(data => {
         data.sort((a, b) => a.levelName.localeCompare(b.levelName, undefined, { sensitivity: 'base' }));
         this.difficulties = data;
+        
+        const allOption = { id: 0, levelName: "All" };
+        this.difficulties = [allOption, ...data];
 
         const defaultType = this.difficulties.find(level => level.id === 1);
         this.quizForm.get('difficultyLevelId')?.setValue(defaultType.id);
@@ -58,7 +61,7 @@ export class PaperGenerateComponent {
 
     let params = new HttpParams()
       .set('subjectId', formValue.subjectId)
-      .set('difficultyId', formValue.difficultyLevelId)
+      .set('difficultyId', formValue.difficultyLevelId ?? 0)
       .set('count', formValue.questionCount)
       .set('includeAnswers', formValue.includeAnswers);
 
