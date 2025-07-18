@@ -22,7 +22,7 @@ export class PaperGenerateComponent {
   ngOnInit() {
     this.quizForm = this.fb.group({
       subjectId: ['', Validators.required],
-      difficultyLevelId: [0, Validators.required],
+      difficultyLevelIds: [[], this.atLeastOneTag],
       questionCount: [5, [Validators.required, Validators.min(1)]],
       tagIds: [[], this.atLeastOneTag],
       includeAnswers: [false]
