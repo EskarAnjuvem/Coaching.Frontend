@@ -67,6 +67,10 @@ export class PaperGenerateComponent {
 
     //.set('tagIds', formValue.tagIds.join(','));  // Convert array to CSV string -- dropped due to casting problem
 
+    formValue.difficultyLevelIds.forEach((levelId:number)=>{
+      params = params.append('difficultyLevelIds',levelId);
+    });
+    
     formValue.tagIds.forEach((tagId: number) => {
       params = params.append('tagIds', tagId);
     });
