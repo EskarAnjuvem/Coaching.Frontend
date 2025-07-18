@@ -60,8 +60,7 @@ export class PaperGenerateComponent {
     const formValue = this.quizForm.value;
 
     let params = new HttpParams()
-      .set('subjectId', formValue.subjectId)
-      .set('difficultyId', formValue.difficultyLevelId ?? 0)
+      .set('subjectId', formValue.subjectId)      
       .set('count', formValue.questionCount)
       .set('includeAnswers', formValue.includeAnswers);
 
