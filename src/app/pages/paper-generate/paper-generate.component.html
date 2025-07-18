@@ -11,7 +11,7 @@
             <div class="col-md-3">
                 <label for="questionDifficultyLevel" class="form-label">Difficulty Level :</label>
                 <ng-select id="questionDifficultyLevel" [items]="difficulties" class="form-control"
-                    bindLabel="levelName" bindValue="id" [multiple]="false" formControlName="difficultyLevelId"
+                    bindLabel="levelName" bindValue="id" [multiple]="true" formControlName="difficultyLevelIds"
                     [searchable]="true" [loading]="difficulties.length === 0">
                 </ng-select>
             </div>
